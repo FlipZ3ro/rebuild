@@ -33,6 +33,7 @@ use solana_sdk::{
 };
 use utils::Tip;
 
+#[allow(dead_code)]
 struct Miner {
     pub keypair_filepath: Option<String>,
     pub priority_fee: Option<u64>,
@@ -41,7 +42,7 @@ struct Miner {
     pub rpc_client: Arc<RpcClient>,
     pub fee_payer_filepath: Option<String>,
     pub jito_client: Arc<RpcClient>,
-    pub tip: Arc<std::sync::RwLock<u64>>,
+    pub tip: Arc<std::sync::RwLock<u64>>
 }
 
 #[derive(Subcommand, Debug)]

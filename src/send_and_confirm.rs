@@ -70,43 +70,43 @@ impl Miner {
             }
         }
 
-        // Set compute unit price
-        final_ixs.push(ComputeBudgetInstruction::set_compute_unit_price(
-            self.priority_fee.unwrap_or(0),
-        ));
+ // Set compute unit price
+final_ixs.push(ComputeBudgetInstruction::set_compute_unit_price(
+    self.priority_fee.unwrap_or(0),
+));
 
-        // Add in user instructions
-        final_ixs.extend_from_slice(ixs);
+// Add in user instructions
+final_ixs.extend_from_slice(ixs);
 
-        // Add jito tip
-        let jito_tip = *self.tip.read().unwrap();
-        if jito_tip > 0 {
-            send_client = self.jito_client.clone();
-        }
-        if jito_tip > 0 {
-            let tip_accounts = [
-                "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5",
-                "HFqU5x63VTqvQss8hp11i4wVV8bD44PvwucfZ2bU7gRe",
-                "Cw8CFyM9FkoMi7K7Crf6HNQqf4uEMzpKw6QNghXLvLkY",
-                "ADaUMid9yfUytqMBgopwjb2DTLSokTSzL1zt6iGPaS49",
-                "DfXygSm4jCyNCybVYYK6DwvWqjKee8pbDmJGcLWNDXjh",
-                "ADuUkR4vqLUMWXxW9gh6D6L8pMSawimctcNZ5pGwDcEt",
-                "DttWaMuVvTiduZRnguLF7jNxTgiMBZ1hyAumKUiL2KRL",
-                "3AVi9Tg9Uo68tJfuvoKvqKNWKkC5wPdSSdeBnizKZ6jT",
-            ];
-            final_ixs.push(transfer(
-                &signer.pubkey(),
-                &Pubkey::from_str(
-                    &tip_accounts
-                        .choose(&mut rand::thread_rng())
-                        .unwrap()
-                        .to_string(),
-                )
-                .unwrap(),
-                jito_tip,
-            ));
-            progress_bar.println(format!("  Jito tip: {} SOL", lamports_to_sol(jito_tip)));
-        }
+// Add Jito tip
+let jito_tip_sol = 0.0001; // Jito tip in SOL
+let jito_tip_lamports = (jito_tip_sol * 1_000_000_000.0) as u64; // Convert SOL to lamports
+
+if jito_tip_lamports > 0 {
+    send_client = self.jito_client.clone();
+    let tip_accounts = [
+        "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5",
+        "HFqU5x63VTqvQss8hp11i4wVV8bD44PvwucfZ2bU7gRe",
+        "Cw8CFyM9FkoMi7K7Crf6HNQqf4uEMzpKw6QNghXLvLkY",
+        "ADaUMid9yfUytqMBgopwjb2DTLSokTSzL1zt6iGPaS49",
+        "DfXygSm4jCyNCybVYYK6DwvWqjKee8pbDmJGcLWNDXjh",
+        "ADuUkR4vqLUMWXxW9gh6D6L8pMSawimctcNZ5pGwDcEt",
+        "DttWaMuVvTiduZRnguLF7jNxTgiMBZ1hyAumKUiL2KRL",
+        "3AVi9Tg9Uo68tJfuvoKvqKNWKkC5wPdSSdeBnizKZ6jT",
+    ];
+    final_ixs.push(transfer(
+        &signer.pubkey(),
+        &Pubkey::from_str(
+            &tip_accounts
+                .choose(&mut rand::thread_rng())
+                .unwrap()
+                .to_string(),
+        )
+        .unwrap(),
+        jito_tip_lamports,
+    ));
+    progress_bar.println(format!("  Jito tip: {} SOL", jito_tip_sol));
+}
 
         // Build tx
         let send_cfg = RpcSendTransactionConfig {
