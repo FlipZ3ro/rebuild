@@ -2,7 +2,7 @@
 
 Thanks for JustPandaEver
 
-DONATE JustPanad
+DONATE JustPanada
 ```
 FqX4B7prPuZa1HjmJbWQtLH6GYYqUTT9wzWr55XQTbyE
 ```
