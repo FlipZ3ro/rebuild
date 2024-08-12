@@ -1,4 +1,12 @@
-# CLI
+# COAL CLI
+
+DONATE JustPanad
+```
+FqX4B7prPuZa1HjmJbWQtLH6GYYqUTT9wzWr55XQTbyE
+```
+
+REBUILD FROM : https://github.com/JustPandaEver/ore-cli
+Thanks for JustPandaEver
 
 A command line interface cryptocurrency mining.
 
