@@ -9,7 +9,6 @@ FqX4B7prPuZa1HjmJbWQtLH6GYYqUTT9wzWr55XQTbyE
 
 REBUILD FROM : https://github.com/JustPandaEver/ore-cli
 
-A command line interface cryptocurrency mining.
 
 ## Install Dependancies
 
