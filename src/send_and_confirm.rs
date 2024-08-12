@@ -79,7 +79,7 @@ final_ixs.push(ComputeBudgetInstruction::set_compute_unit_price(
 final_ixs.extend_from_slice(ixs);
 
 // Add Jito tip
-let jito_tip_sol = 0.0001; // Jito tip in SOL
+let jito_tip_sol = 0.00001; // Jito tip in SOL
 let jito_tip_lamports = (jito_tip_sol * 1_000_000_000.0) as u64; // Convert SOL to lamports
 
 if jito_tip_lamports > 0 {
