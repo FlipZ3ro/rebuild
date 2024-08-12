@@ -40,5 +40,5 @@ cargo build --release
 
 Running code
 ```
-cargo run --release mine
+cargo run --release mine --keypire /root/id.js
 ```
